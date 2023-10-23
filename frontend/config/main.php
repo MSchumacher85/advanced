@@ -37,14 +37,25 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
+                //news
+                'news' => 'news/index',
+                'news/<id:\d+>' => 'news/view',
+
+                //category
+                'category' => 'category/index',
+                '/category/<id:\d+>' => 'category/view',
+
+                //tag
+                'tag' => 'tag/index',
+                'tag/<id:\d+>' => 'tag/view',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
