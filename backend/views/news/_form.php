@@ -1,11 +1,13 @@
 <?php
 
+
+use kartik\form\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 
 /** @var yii\web\View $this */
 /** @var backend\models\News $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var kartik\form\ActiveForm $form */
 ?>
 
 <div class="news-form">
@@ -20,7 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'enabled')->textInput() ?>
+    <?php /*= $form->field($model, 'enabled')->textInput() */?>
+
+    <?= $form->field($model, 'enabled')->radioButtonGroup([1 => 'Да', 0 => 'Нет']); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -29,3 +33,11 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+
+$this->registerJs(
+    "$('#news-enabled .btn').on('click', function() { $('#news-enabled .btn.active').removeClass('active'); });"//Todo удаление класса
+);
+
+?>

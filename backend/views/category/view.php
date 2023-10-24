@@ -32,7 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'slug',
             'title',
-            'enabled',
+            //'enabled',
+            [
+                    'attribute' => 'enabled',
+                    'format' => 'raw',
+                    'value' => $model->enabled == 0 ? '<span style="color:red;">Нет</span>' : '<span style="color:green;">Да</span>'
+            ]
         ],
     ]) ?>
 
