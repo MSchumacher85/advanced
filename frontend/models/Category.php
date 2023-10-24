@@ -10,4 +10,9 @@ class Category extends ActiveRecord
     {
         return '{{%category}}';
     }
+
+    public function getNews(){
+        return $this->hasMany(News::class, ['category_id' => 'id']);
+    }
+
 }

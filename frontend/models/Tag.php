@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use backend\models\TagToNews;
 use yii\db\ActiveRecord;
 
 class Tag extends ActiveRecord
@@ -10,4 +11,15 @@ class Tag extends ActiveRecord
     {
         return '{{%tag}}';
     }
+
+    public function getTagToNews()
+    {
+        return $this->hasMany(TagToNews::class, ['tag_id' => 'id']);
+    }
+
+    public function getNews()
+    {
+        return $this->hasMany(News::class, ['id' => 'news_id'])->via('tagToNews');
+    }
+
 }

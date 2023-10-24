@@ -7,12 +7,15 @@ use yii\web\Controller;
 
 class NewsController extends Controller
 {
-    public function actionIndex(){
+    public function actionIndex()
+    {
 
         return $this->render('index');
     }
 
-    public function actionView(){
+
+    public function actionView()
+    {
 
         $id = \Yii::$app->request->get('id');
 
