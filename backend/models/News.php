@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\behaviors\SluggableBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "news".
@@ -21,9 +22,7 @@ use yii\behaviors\SluggableBehavior;
  */
 class News extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $formTags;
     public static function tableName()
     {
         return 'news';
@@ -51,6 +50,7 @@ class News extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['slug', 'title'], 'string', 'max' => 256],
             [['slug'], 'unique'],
+            [['formTags'], 'safe'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
         ];
     }

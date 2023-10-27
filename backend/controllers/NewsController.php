@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\News;
 use backend\models\searches\NewsSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,7 +23,7 @@ class NewsController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -92,6 +93,8 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $model->formTags = ArrayHelper::getColumn($model->tags, 'id');
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

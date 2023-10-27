@@ -2,12 +2,15 @@
 
 
 use kartik\form\ActiveForm;
+use kartik\select2\Select2;
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 
 
 /** @var yii\web\View $this */
 /** @var backend\models\News $model */
 /** @var kartik\form\ActiveForm $form */
+/** @var backend\models\News $formTagsArray */
 ?>
 
 <div class="news-form">
@@ -16,13 +19,33 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Category::find()->all(), 'id', 'title')) ?>
 
-    <?php /*= $form->field($model, 'slug')->textInput(['maxlength' => true]) */?>
+    <?php /*= $form->field($model, 'slug')->textInput(['maxlength' => true]) */ ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?php
+    echo $form->field($model, 'formTags')->widget(Select2::class, [
+        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Tag::find()->all(), 'id', 'title'),
+        'options' => ['placeholder' => 'Select a color ...', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 10
+        ],
+    ])->label('Tag Multiple');
+    ?>
 
-    <?php /*= $form->field($model, 'enabled')->textInput() */?>
+    <?php echo $form->field($model, 'description')->widget(CKEditor::class, [
+        'editorOptions' => [
+            'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'inline' => false, //по умолчанию false
+            'height' => '200px'
+        ],
+    ]); ?>
+
+    <?php /*= $form->field($model, 'description')->textarea(['rows' => 6]) */ ?>
+
+    <?php /*= $form->field($model, 'enabled')->textInput() */ ?>
 
     <?= $form->field($model, 'enabled')->radioButtonGroup([1 => 'Да', 0 => 'Нет']); ?>
 
