@@ -1,6 +1,12 @@
 <?php
+
+use yii\widgets\ListView;
+
 /**
- * @var $model frontend\controllers\CategoryController;
- * @var $id;
+ * @var \yii\data\ActiveDataProvider $dataProvider;
  */
-echo "Категория - {$model->title} №: {$id}";
+
+echo ListView::widget([
+    'dataProvider' => $dataProvider,
+    'itemView' => '//news/_news_items',
+]);

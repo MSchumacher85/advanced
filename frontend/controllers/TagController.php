@@ -3,13 +3,16 @@
 namespace frontend\controllers;
 
 use frontend\models\Tag;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class TagController extends Controller
 {
     public function actionIndex(){
 
-        return $this->render('index');
+        $model = Tag::find()->all();
+
+        return $this->render('index', compact('model'));
     }
 
     public function actionView(){
@@ -18,6 +21,13 @@ class TagController extends Controller
 
         $model = Tag::findOne($id);
 
-        return $this->render('view', compact('id', 'model'));
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->getNews(),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('view', compact('id', 'dataProvider'));
     }
 }

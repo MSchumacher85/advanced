@@ -1,6 +1,18 @@
 <?php
 /**
- * @var $model frontend\controllers\TagController;
- * @var $id;
+ * @var \yii\data\ActiveDataProvider $dataProvider
  */
-echo "Ярлык - {$model->title} №: {$id}";
+
+use yii\widgets\ListView;
+
+
+if ($dataProvider->getCount() > 0) {
+    echo ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '//news/_news_items',
+    ]);
+}
+
+
+
+

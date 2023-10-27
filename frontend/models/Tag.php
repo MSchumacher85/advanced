@@ -2,7 +2,6 @@
 
 namespace frontend\models;
 
-use backend\models\TagToNews;
 use yii\db\ActiveRecord;
 
 class Tag extends ActiveRecord

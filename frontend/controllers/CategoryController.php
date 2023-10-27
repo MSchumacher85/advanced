@@ -3,13 +3,24 @@
 namespace frontend\controllers;
 
 use frontend\models\Category;
+use frontend\models\News;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class CategoryController extends Controller
 {
     public function actionIndex(){
 
-        return $this->render('index');
+        $this->view->title = 'Категории';
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Category::find()->innerJoinWith('news'),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('index', compact('dataProvider'));
     }
 
     public function actionView(){
@@ -18,6 +29,13 @@ class CategoryController extends Controller
 
         $model = Category::findOne($id);
 
-        return $this->render('view', compact('id', 'model'));
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->getNews(),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('view', compact('dataProvider'));
     }
 }
