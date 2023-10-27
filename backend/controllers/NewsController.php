@@ -94,8 +94,6 @@ class NewsController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->formTags = ArrayHelper::getColumn($model->tags, 'id');
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

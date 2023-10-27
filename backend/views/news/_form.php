@@ -24,8 +24,9 @@ use yii\helpers\Html;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?php
+
     echo $form->field($model, 'formTags')->widget(Select2::class, [
-        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Tag::find()->all(), 'id', 'title'),
+        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Tag::find()->all(), 'title', 'title'),
         'options' => ['placeholder' => 'Select a color ...', 'multiple' => true],
         'pluginOptions' => [
             'tags' => true,
