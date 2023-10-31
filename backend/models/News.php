@@ -120,7 +120,7 @@ class News extends \yii\db\ActiveRecord
 
             $this->unlinkAll('tagToNews', true);//то же самое TagToNews::deleteAll(['news_id' => $this->id]);
 
-            foreach ($this->formTags as $tagTitle) { //Todo Берем все наши теги, проверяем нет тега в нашей таблице. Если нет то записываем его и сохраняем
+            foreach ($this->formTags as $tagTitle) { //Todo Берем все наши теги, проверяем нет ли  тега в нашей таблице. Если нет то записываем его и сохраняем
                 $tag = Tag::findOne(['title' => $tagTitle]);
 
                 if (!$tag) {//если тега нет в таблице, то добавляем его

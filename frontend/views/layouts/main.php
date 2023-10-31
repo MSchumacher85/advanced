@@ -36,14 +36,14 @@ AppAsset::register($this);
             ],
         ]);
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => Yii::t('frontend', 'News'), 'url' => ['/site/index']],
             ['label' => 'Новости',
                 'items' => [
-                    ['label' => 'Новости', 'url' => ['/news/index']]//Todo menu
+                    ['label' => Yii::t('frontend', 'News'), 'url' => ['/news/index']]//Todo menu
                 ]
             ],
-            ['label' => 'Категории', 'url' => ['/category/index']],
-            ['label' => 'Ярлыки', 'url' => ['/tag/index']],
+            ['label' => Yii::t('frontend', 'Categories'), 'url' => ['/category/index']],
+            ['label' => Yii::t('frontend', 'Tags'), 'url' => ['/tag/index']],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -53,16 +53,6 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
             'items' => $menuItems,
         ]);
-        if (Yii::$app->user->isGuest) {
-            echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
-        } else {
-            echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout text-decoration-none']
-                )
-                . Html::endForm();
-        }
         NavBar::end();
         ?>
     </header>

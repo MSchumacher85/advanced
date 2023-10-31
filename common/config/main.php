@@ -5,7 +5,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'language' => 'ru',
+    'language' => 'ru-RU',
     'components' => [
         'assetManager' => [
             'bundles' => [
