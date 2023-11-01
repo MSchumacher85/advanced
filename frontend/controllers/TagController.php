@@ -5,12 +5,15 @@ namespace frontend\controllers;
 use frontend\models\Tag;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class TagController extends Controller
 {
     public function actionIndex(){
 
         $model = Tag::find()->all();
+
+        $this->view->title = \Yii::t('frontend','Tags');
 
         return $this->render('index', compact('model'));
     }
@@ -20,6 +23,10 @@ class TagController extends Controller
         $id = \Yii::$app->request->get('id');
 
         $model = Tag::findOne($id);
+
+        if($model === null){
+            throw new NotFoundHttpException(\Yii::t('frontend', 'Page not found'));
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $model->getNews(),

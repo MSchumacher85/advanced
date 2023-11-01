@@ -36,7 +36,7 @@ AppAsset::register($this);
             ],
         ]);
         $menuItems = [
-            ['label' => Yii::t('frontend', 'News'), 'url' => ['/site/index']],
+            ['label' => Yii::t('frontend', 'home'), 'url' => ['/site/index']],
             ['label' => 'Новости',
                 'items' => [
                     ['label' => Yii::t('frontend', 'News'), 'url' => ['/news/index']]//Todo menu

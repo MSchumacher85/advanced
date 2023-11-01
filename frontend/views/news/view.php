@@ -23,5 +23,5 @@ foreach ($model->getTag()->each() as $item) {
 <?php $this->registerCss(".btn { margin-right: 5px }"); ?>
 
 <?php
-    echo Html::a( 'Назад', Yii::$app->request->referrer, ['class' => 'btn btn-danger']);
+    echo Html::a( Yii::t('frontend', 'Go back'), Yii::$app->request->referrer, ['class' => 'btn btn-danger']);
 ?>
