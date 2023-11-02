@@ -2,24 +2,28 @@
 
 namespace backend\models\searches;
 
+use backend\models\SourceMessage;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\News;
+use backend\models\Message;
 
 /**
- * NewsSearch represents the model behind the search form of `backend\models\News`.
+ * MessageSearch represents the model behind the search form of `backend\models\Message`.
  */
-class NewsSearch extends News
+class MessageSearch extends Message
 {
     /**
      * {@inheritdoc}
      */
+
+    public $message;
+
     public function rules()
     {
         return [
-            [['id', 'enabled'], 'integer'],
-            [['category_id'], 'string'],
-            [['slug', 'title', 'description'], 'safe'],
+            [['id'], 'integer'],
+            [['message'], 'string'],
+            [['language', 'translation'], 'safe'],
         ];
     }
 
@@ -41,7 +45,9 @@ class NewsSearch extends News
      */
     public function search($params)
     {
-        $query = News::find()->joinWith('category');
+        //$query = Message::find()->innerJoinWith('source')->onCondition([SourceMessage::tableName().'.category' => 'frontend']);
+
+        $query = Message::find()->joinWith('source');
 
         // add conditions that should always apply here
 
@@ -59,15 +65,12 @@ class NewsSearch extends News
 
         // grid filtering conditions
         $query->andFilterWhere([
-            '{{%news}}.id' => $this->id,
-            //'{{%news}}.category_id' => $this->category_id,//Todo
-            '{{%news}}.enabled' => $this->enabled,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', '{{%news}}.slug', $this->slug])
-            ->andFilterWhere(['like', '{{%news}}.title', $this->title])
-            ->andFilterWhere(['like', '{{%news}}.description', $this->description])
-            ->andFilterWhere(['like', 'category.title', $this->category_id]);//Todo
+        $query->andFilterWhere(['like', 'language', $this->language])
+            ->andFilterWhere(['like', 'translation', $this->translation])
+            ->andFilterWhere(['like', 'message', $this->message]);//Todo
 
         return $dataProvider;
     }

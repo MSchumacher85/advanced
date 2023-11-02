@@ -30,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'category_id',
+            //'category_id',
+            [
+                'attribute' => 'category_id',
+                'value' => 'category.title',//Todo обращемся к полю связаной таблице
+            ],
             'slug',
             'title',
             'description:ntext',
@@ -39,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::class,
                 'urlCreator' => function ($action, News $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

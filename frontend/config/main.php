@@ -59,12 +59,13 @@ return [
         'i18n' => [
             'translations' => [
                 'frontend' => [//Todo Указывается первым параметром Yii::t()
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    /*'class' => 'yii\i18n\PhpMessageSource',//Используем файлы
                     'basePath' => '@frontend/messages/',
                     'fileMap' => [
                         'frontend' => 'frontend.php',
                         'app/error' => 'error.php',
-                    ],
+                    ],*/
+                    'class' => 'yii\i18n\DbMessageSource',//Используем БД
                 ],
                 'yii' => [
                     'class' => 'yii\i18n\PhpMessageSource',

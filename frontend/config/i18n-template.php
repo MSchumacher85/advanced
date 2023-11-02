@@ -42,7 +42,7 @@ return [
         '/BaseYii.php',
     ],
     // 'php' output format is for saving messages to php files.
-    'format' => 'php',
+    //'format' => 'php',//Todo при использовании файлов для хранения перевода
     // Root directory containing message translations.
     'messagePath' => __DIR__.'/../messages/',
     // boolean, whether the message file should be overwritten with the merged messages
@@ -61,16 +61,16 @@ return [
     ],
      */
 
-    /*
+
     // 'db' output format is for saving messages to database.
-    'format' => 'db',
+    'format' => 'db',//Todo при использовании bd для хранения перевода
     // Connection component to use. Optional.
-    'db' => 'db',
+    'db' => 'db',//Todo при использовании bd для хранения перевода
     // Custom source message table. Optional.
     // 'sourceMessageTable' => '{{%source_message}}',
     // Custom name for translation message table. Optional.
     // 'messageTable' => '{{%message}}',
-    */
+
 
     /*
     // 'po' output format is for saving messages to gettext po files.
