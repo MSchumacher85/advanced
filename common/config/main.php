@@ -16,6 +16,15 @@ return [
         ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,
+            'cachePath' => '@frontend/runtime/cache'//Todo, если захотим очищать кеш через консоль, необходимо прописать 'cachePath'
+        ],
+        'cache_frontend' => [
+            'class' => \yii\caching\FileCache::class,
+            'cachePath' => '@frontend/runtime/cache'//Todo, если захотим очищать кеш через консоль, необходимо прописать 'cachePath'
+        ],
+        'cache_backend' => [
+            'class' => \yii\caching\FileCache::class,
+            'cachePath' => '@backend/runtime/cache'
         ],
     ],
     'modules' => [

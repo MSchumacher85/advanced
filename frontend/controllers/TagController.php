@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function actionIndex(){
 
-        $model = Tag::find()->all();
+        $model = Tag::find();
 
         $this->view->title = \Yii::t('frontend','Tags');
 
