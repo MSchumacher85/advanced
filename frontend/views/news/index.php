@@ -1,20 +1,20 @@
 <?php
 
-use yii\widgets\ListView;
+/**
+ * @var frontend\models\News $model
+ */
 
-/** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var frontend\controllers\NewsController $title */
+/**
+ * @var frontend\models\Comment $modelForm
+ */
 
-Yii::$app->view->title = $title;
+?>
 
-echo '<h1>'.\yii\helpers\Html::encode($title).'</h1>';
+<?= $this->render('@frontend/views/comment/form', compact('model', 'modelForm')); ?>
+<?= $this->render('@frontend/views/comment/modalLogin'); ?>
+<?= $this->render('@frontend/views/comment/modalSignup'); ?>
 
-if($dataProvider->getCount() > 0){
-    echo ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemView' => '_news_items',
-        'options' => ['class = list-group']
-    ]);
-}
-
+<?php
+$this->registerCss(".post { border: 1px solid black; border-radius: 10px; margin-top: 5px; padding: 10px }");
+?>
 

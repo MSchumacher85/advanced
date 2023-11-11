@@ -29,4 +29,8 @@ class News extends ActiveRecord
     {
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagToNews');
     }
+
+    public function getComment(){
+        return $this->hasMany(Comment::class, ['news_id' => 'id']);
+    }
 }

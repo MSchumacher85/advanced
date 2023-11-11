@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function behaviors()
     {
-        return [
+        return [//Кеширование на стороне клиента
             [
                 'class' => 'yii\filters\HttpCache',
                 'only' => ['index'],

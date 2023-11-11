@@ -39,7 +39,7 @@ AppAsset::register($this);
             ['label' => Yii::t('frontend', 'home'), 'url' => ['/site/index']],
             ['label' => 'Новости',
                 'items' => [
-                    ['label' => Yii::t('frontend', 'News'), 'url' => ['/news/index']]//Todo menu
+                    ['label' => Yii::t('frontend', 'News'), 'url' => ['/news/index'], 'linkOptions'=> ['class'=>'item-a-class']]//Todo menu
                 ]
             ],
             ['label' => Yii::t('frontend', 'Categories'), 'url' => ['/category/index']],
@@ -53,6 +53,16 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
             'items' => $menuItems,
         ]);
+        if (Yii::$app->user->isGuest) {
+            echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
+        } else {
+            echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-link logout text-decoration-none']
+                )
+                . Html::endForm();
+        }
         NavBar::end();
         ?>
     </header>
@@ -73,7 +83,7 @@ AppAsset::register($this);
             <p class="float-end"><?= Yii::powered() ?></p>
         </div>
     </footer>
-
+    <?php $this->registerCss(".item-a-class {background: inherit !important; color:inherit !important;}"); ?>
     <?php $this->endBody() ?>
     </body>
     </html>

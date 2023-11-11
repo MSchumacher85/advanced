@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Comment;
 use frontend\models\News;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -13,7 +14,7 @@ class NewsController extends Controller
     public function behaviors()
     {
         return [//Кеширование на стороне сервера
-            [
+           /* [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
                 'duration' => 60,
@@ -25,7 +26,7 @@ class NewsController extends Controller
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM'.News::tableName(),
                 ],
-            ],
+            ],*/
             [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['view'],
@@ -45,14 +46,18 @@ class NewsController extends Controller
     {
         $title = \Yii::t('frontend', 'News');
 
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
             'query' => News::find()->innerJoinWith('category'),//Todo innerJoinWith
             'pagination' => [
                 'pageSize' => 20,
             ],
-        ]);
+        ]);*/
 
-        return $this->render('index', compact('title', 'dataProvider'));
+        $model = News::find()->innerJoinWith('category')->all();
+
+        $modelForm = new Comment();
+
+        return $this->render('index', compact('title', 'model', 'modelForm'));
     }
 
 
