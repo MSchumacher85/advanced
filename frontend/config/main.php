@@ -17,6 +17,9 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ''
         ],
+        'formatter' => [
+            'dateFormat' => 'dd.MM.yyyy',
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

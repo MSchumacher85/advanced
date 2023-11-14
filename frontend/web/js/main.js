@@ -5,13 +5,16 @@ for(var btnComment of btnComments){
             btnComment.dataset.bsToggle = 'modal';
             btnComment.dataset.bsTarget = '#exampleModalLogin';
         }
+
 }
 
 
 $(document).on('click', '.scrollButton', function(){
-    var scrollToId = $(this).data("scroll");
-    console.log(scrollToId);
-    $('html, body').animate({
-        scrollTop: $("#" + scrollToId).offset().top
-    }, 1000); // Скорость прокрутки
-});
+        if($(this).data('guest') == false) {
+            var scrollToId = $(this).data("scroll");
+            console.log(scrollToId);
+            $('html, body').animate({
+                scrollTop: $("#" + scrollToId).offset().top
+            }, 1000); // Скорость прокрутки
+        }
+    });

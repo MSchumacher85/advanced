@@ -2,8 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use frontend\models\Comment;
 use frontend\models\News;
+use Yii;
+use yii\caching\ChainedDependency;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,19 +17,23 @@ class NewsController extends Controller
     public function behaviors()
     {
         return [//Кеширование на стороне сервера
-           /* [
+           [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
-                'duration' => 60,
+                'duration' => 120,
                 'variations' => [
                     \Yii::$app->request->get('page'),
-                    \Yii::$app->request->get('pare-page'),
+                    \Yii::$app->user->isGuest,//При изменении значения isGuest обновляется кеш
                 ],
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM'.News::tableName(),
+                'dependency' => [ //Todo несколько зависимостей для кеша
+                    'class' => 'yii\caching\ChainedDependency',
+                    'dependencies' =>[
+                        //new \yii\caching\DbDependency(['sql'=>'SELECT username FROM'.User::tableName()]),
+                        new \yii\caching\DbDependency(['sql'=>'SELECT COUNT(*) FROM'.News::tableName()]),//При изменении значения количества записей в таблице news люновляется кеш
+                        new \yii\caching\DbDependency(['sql'=>'SELECT COUNT(*) FROM'.Comment::tableName()])
+                    ]
                 ],
-            ],*/
+            ],
             [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['view'],

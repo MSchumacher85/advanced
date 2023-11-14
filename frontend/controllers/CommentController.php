@@ -13,12 +13,15 @@ class CommentController extends Controller
 
         $id = \Yii::$app->request->get('id');
 
-        $news = News::findOne($id);
+        $parent = \Yii::$app->request->get('parent');
 
         $model = new Comment();
 
         if ($model->load(\Yii::$app->request->post())) {
             $model->news_id = $id;
+
+            !$parent ? $model->parent_id = 0 : $model->parent_id = $parent;
+
             if ($model->save()) {
                 \Yii::$app->session->setFlash('success', 'Коментарий добавлен');
             } else {

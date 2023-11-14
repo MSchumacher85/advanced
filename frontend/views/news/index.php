@@ -17,4 +17,3 @@
 <?php
 $this->registerCss(".post { border: 1px solid black; border-radius: 10px; margin-top: 5px; padding: 10px }");
 ?>
-
